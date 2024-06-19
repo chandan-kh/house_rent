@@ -472,10 +472,10 @@ app.get('/buildings/:owner_id', (req, res) => {
     });
   });
   
-const port = process.env.PORT || 4000;
 
-app.listen(port, () => {
-    console.log(`Connected to backend on port ${port}`);
-});
+
+app.listen(4000,()=>{
+console.log("Connected to backend");
+})
 
  
