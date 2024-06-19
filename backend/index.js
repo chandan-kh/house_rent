@@ -7,6 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const port = process.env.PORT || 4000;
 
 let owner_id = null;
 let tenant_id = null;
@@ -473,8 +474,9 @@ app.get('/buildings/:owner_id', (req, res) => {
   });
   
 
-app.listen(4000,()=>{
-    console.log("Connected to backend");
-})
+
+app.listen(port, () => {
+    console.log(`Connected to backend on port ${port}`);
+});
 
  
