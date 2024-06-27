@@ -1,6 +1,8 @@
 import express from "express";
 import mysql from "mysql2"; 
 import cors from "cors";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 
@@ -18,12 +20,19 @@ let tenant_id = null;
 // app.get("/housesForTenant")
 // app.post("/listHouseByOwner")
 
+// const db = mysql.createConnection({
+//     user : 'root',
+//     host : 'localhost',
+//     password : 'Hassan@123',
+//     database : 'houserentdb',
+// })
+
 const db = mysql.createConnection({
-    user : 'root',
-    host : 'localhost',
-    password : 'Hassan@123',
-    database : 'houserentdb',
-})
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+});
 
 db.connect((err,res)=>{
     if(!err) {
@@ -180,6 +189,7 @@ app.post('/ownerlanding', (req, res) => {
             console.log(err);
             return res.json(err);
         }
+        console.log(result);
         const houseCount = result[0].houseCount;
         if (houseCount >= 3) {
             return res.json({ message: 'Payment required for additional houses', redirectToPayment: true });
